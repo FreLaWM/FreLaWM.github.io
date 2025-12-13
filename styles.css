@@ -172,6 +172,16 @@ tr:nth-child(even) {
     padding: 20px;
 }
 
+/* Image styles */
+.overview-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
 /* Audio table styles */
 .audio-table {
     width: 100%;
