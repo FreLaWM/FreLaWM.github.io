@@ -9,8 +9,10 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Frela: Frequency-Layered Audio Watermarking for Robust Content Authentication</h1>
-            <p class="subtitle">Comprehensive Experimental Evaluation</p>
+            <h1><strong>FRELA:</strong> 
+                Frequency-Layered Audio Watermarking for <br>
+                Robust Content Authentication</h1>
+            <p class="subtitle">Experimental Evaluation and Sound Demo</p>
         </div>
 
         <div class="content">
@@ -19,7 +21,7 @@
             <div class="section">
                 <h2>Abstract</h2>
                 <p>
-                    In this paper, we present \ours, a frequency-layered audio watermarking method for robust content
+                    In this paper, we present FreLa, a frequency-layered audio watermarking method for robust content
                     authentication. FreLa targets the growing misuse of online audio, such as voice cloning and generative
                     model synthesis by embedding imperceptible identifiers directly into speech signals. Unlike existing
                     schemes that concentrate watermark energy within a narrow spectral region, FreLa decomposes speech
@@ -54,7 +56,8 @@
                             <a href="https://keithito.com/LJ-Speech-Dataset/" target="_blank" rel="noopener noreferrer">LJSpeech 1.1</a>
                             <a href="https://www.openslr.org/12/" target="_blank" rel="noopener noreferrer">LibriSpeech</a>
                         </li>
-                        <li><strong>Baseline Methods:</strong> AudioSeal, WavMark, Timbre Watermarking</li>
+                        <li><strong>Baseline Methods:</strong> 
+                            <a href="https://github.com/facebookresearch/audioseal" >AudioSeal</a>, WavMark, Timbre Watermarking</li>
                         <li><strong>Evaluation Metrics:</strong> SI-SNR, STOI, Cosine Similarity, PESQ </li>
                         <li><strong>Attack Scenarios:</strong> Additive noise, filtering, pitch/speed changes, amplitude scaling, temporal edits, sampling distortions, neural coder compression, AI-based post-processing</li>
                     </ul>
@@ -254,7 +257,7 @@
             <div class="section">
                 <h2>Main Results</h2>
                 
-                <h3>Performance Metrics</h3>
+                <h3>Ablation on Frequency Band Partitioning</h3>
 
                 <div class="table-container">
                     <table>
@@ -327,7 +330,7 @@
                     </div>
                 </div> -->
 
-                <h3>Comparative Analysis</h3>
+                <h3>Perceptual Quality of Watermarked Audio</h3>
                 <div class="table-container">
                     <table>
                         <thead>
@@ -373,6 +376,8 @@
                 </div>
             </div>
 
+
+
             <!-- Visualizations -->
             <!-- <div class="section">
                 <h2>Experimental Visualizations</h2>
@@ -397,59 +402,784 @@
             </div>
 
             <!-- Ablation Studies -->
-            <!-- <div class="section">
-                <h2>Ablation Studies</h2>
-                <p>This section examines the contribution of individual components to the overall performance.</p>
-                
-                <div class="table-container">
+            <div class="section">
+                <h2>Robustness to Transformations</h2>
+                <p>This section demonstrates the robustness of the proposed method against various audio transformations.
+                    <strong>Bit Acc</strong> indicates the accuracy of watermark extraction after applying the specified attack.
+                </p>
+
+                <div class="audio-table">
                     <table>
                         <thead>
                             <tr>
-                                <th>Configuration</th>
-                                <th>Component A</th>
-                                <th>Component B</th>
-                                <th>Component C</th>
-                                <th>Accuracy (%)</th>
-                                <th>Δ Performance</th>
+                                <th>Audio Samples</th>
+                                <th>FRELA</th>
+                                <th>AudioSeal</th>
+                                <th>Timbre</th>
+                                <th>WavMark</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody>                   
                             <tr>
-                                <td><strong>Full Model</strong></td>
-                                <td>✓</td>
-                                <td>✓</td>
-                                <td>✓</td>
-                                <td><strong>95.2</strong></td>
-                                <td>baseline</td>
+                                <td data-label="Sample">
+                                    Noise Attack
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Noise.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Noise.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.38</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Noise.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.92</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Noise.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.85</strong></div>
+                                </td>
+
                             </tr>
+
                             <tr>
-                                <td>w/o Component A</td>
-                                <td>✗</td>
-                                <td>✓</td>
-                                <td>✓</td>
-                                <td>92.8</td>
-                                <td>-2.4</td>
+                                <td data-label="Sample">
+                                    Low-pass
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Lowpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Lowpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Lowpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Lowpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+
                             </tr>
+
                             <tr>
-                                <td>w/o Component B</td>
-                                <td>✓</td>
-                                <td>✗</td>
-                                <td>✓</td>
-                                <td>93.5</td>
-                                <td>-1.7</td>
+                                <td data-label="Sample">
+                                    High-pass
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Highpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Highpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Highpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.72</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Highpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.5</strong></div>
+                                </td>
+
                             </tr>
+
                             <tr>
-                                <td>w/o Component C</td>
-                                <td>✓</td>
-                                <td>✓</td>
-                                <td>✗</td>
-                                <td>94.1</td>
-                                <td>-1.1</td>
+                                <td data-label="Sample">
+                                    Band-pass
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Bandpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Bandpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.5</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Bandpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Bandpass.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+
                             </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Speed (0.8x)
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Speed(0.8x).wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Speed(0.8x).wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.11</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Speed(0.8x).wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Speed(0.8x).wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Speed (1.2x)
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Speed(1.2x).wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Speed(1.2x).wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.21</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Speed(1.2x).wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Speed(1.2x).wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Pitch Shift
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Pitch.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Pitch.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Pitch.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.57</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Pitch.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.5</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Boost
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Boost.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Boost.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Boost.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Boost.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Ducking
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Duck.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Duck.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Duck.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Duck.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Echo
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Echo.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Echo.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.96</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Echo.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Echo.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Masking
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Mask.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Mask.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.81</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Mask.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.99</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Mask.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Pink Noise
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Pink.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Pink.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.39</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Pink.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.97</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Pink.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    White Noise
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_White.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_White.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.28</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_White.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.87</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_White.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Smothing
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Smooth.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Smooth.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Smooth.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.99</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Smooth.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Resampled
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Resampled.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Resampled.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Resampled.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.73</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Resampled.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Downsampled
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Downsampled.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Downsampled.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.38</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Downsampled.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.01</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Downsampled.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.23</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Cropped
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Cropped.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Cropped.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Cropped.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Cropped.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Concat
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Concat.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Concat.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Concat.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Concat.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    EnCodec
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_EnCodec.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_EnCodec.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.84</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_EnCodec.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.71</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_EnCodec.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.5</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    YourTTS
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_YourTTS.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_YourTTS.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_YourTTS.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.53</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_YourTTS.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 0.45</strong></div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td data-label="Sample">
+                                    Demucs-Vocals
+                                </td>
+                                
+                                <td data-label="FreLa">
+                                    <audio controls>
+                                        <source src="audio/FreLa/attacking/1089-134686-0003_watermarked_Demucs-Vocals.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="AudioSeal">
+                                    <audio controls>
+                                        <source src="audio/AudioSeal/attacking/1089-134686-0003_audioseal_Demucs-Vocals.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="Timbre">
+                                    <audio controls>
+                                        <source src="audio/Timbre/attacking/1089-134686-0003_timbre_Demucs-Vocals.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+                                <td data-label="WavMark">
+                                    <audio controls>
+                                        <source src="audio/WavMark/attacking/1089-134686-0003_wavmark_Demucs-Vocals.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <div class="audio-label"><strong>Bit Acc: 1.0</strong></div>
+                                </td>
+
+                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
-            </div> -->
+            </div>
 
             <!-- Statistical Analysis -->
             <!-- <div class="section">
